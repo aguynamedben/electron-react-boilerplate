@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Counter.css';
 import routes from '../constants/routes.json';
+import { ImportedFooError } from '../errors';
 
 type Props = {
   increment: () => void,
@@ -16,6 +17,19 @@ export default class Counter extends Component<Props> {
   props: Props;
 
   render() {
+    try {
+      throw new ImportedFooError('We threw ImportedFooError (other file)');
+    } catch (error) {
+      console.log(`instanceof ImportedFooError (other file)`, error instanceof ImportedFooError);
+    }
+
+    class LocalFooError extends Error {}
+    try {
+      throw new LocalFooError('We threw LocalFooError');
+    } catch (error) {
+      console.log(`instanceof LocalFooError`, error instanceof LocalFooError);
+    }
+
     const {
       increment,
       incrementIfOdd,
