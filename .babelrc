@@ -10,7 +10,12 @@
     "stage-0",
     "react"
   ],
-  "plugins": ["add-module-exports"],
+  "plugins": [
+    "add-module-exports",
+    ["babel-plugin-transform-builtin-extend", {
+      "globals": ["Error", "Array"]
+    }]
+  ],
   "env": {
     "production": {
       "presets": ["react-optimize"],
